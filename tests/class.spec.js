@@ -4,7 +4,7 @@ import { MainPage } from '../src/pages/main.page';
 import { RegisterPage } from '../src/pages/register.page';
 import { YourFeedPage } from '../src/pages/yourfeed.page';
 
-test.only('Авторизованный пользователь может просмотреть список статей', async ({
+test('Авторизованный пользователь может просмотреть список статей', async ({
 	page,
 }) => {
 	// Готовим страницы
