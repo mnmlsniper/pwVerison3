@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "allure3Macos": "npx allure awesome ./allure-results --single-file",
+    "codegen": "npx playwright codegen",
     "test": "npx playwright test",
-    "testUI": "npx playwright test --ui",
-    "codegen": "npx playwright codegen"
+    "testUI": "npx playwright test --ui"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +17,8 @@
     "@types/node": "^22.14.0"
   },
   "dependencies": {
-    "@faker-js/faker": "^9.6.0"
+    "@faker-js/faker": "^9.6.0",
+    "allure": "^3.0.0-beta.12",
+    "allure-playwright": "^3.2.1"
   }
 }
