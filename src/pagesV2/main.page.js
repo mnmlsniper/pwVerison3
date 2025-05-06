@@ -1,3 +1,5 @@
+import { test } from '@playwright/test';
+
 export class MainPage {
 	constructor(page) {
 		this.page = page;
@@ -5,11 +7,15 @@ export class MainPage {
 	}
 
 	async open() {
-		// todo урл унести в конфиги
-		await this.page.goto('https://realworld.qa.guru/');
+		return test.step('Открыть страницу', async () => {
+			// todo урл унести в конфиги
+			await this.page.goto('https://realworld.qa.guru/');
+		});
 	}
 
 	async gotoLogin() {
-		await this.signupButton.click();
+		return test.step('Кликнуть на кнопку', async () => {
+			await this.signupButton.click();
+		});
 	}
 }

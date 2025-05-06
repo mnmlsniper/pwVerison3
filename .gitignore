@@ -6,3 +6,6 @@ node_modules/
 /blob-report/
 /playwright/.cache/
 .DS_Store
+.allure
+allure-report
+allure-results
