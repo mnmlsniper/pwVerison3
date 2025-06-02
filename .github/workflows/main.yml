@@ -1,0 +1,30 @@
+# Название workflow
+name: e2e playwright
+
+# Триггер, когда запускать
+on:
+  push:
+    branches : [main, master]
+  pull_request:
+    branches : [main, master]
+  workflow_dispatch:
+
+
+# Сами джобы
+jobs:
+    #название джобы
+  e2e:
+    timeout-minutes: 30
+    runs-on: ubuntu-latest
+    steps:
+      #делаем чекаут кода
+      - uses: action/checkout@v4.2.2
+      - uses: action/setup-node@4
+        with:
+          node-version: lts/*
+      - name: install npm package    
+        run: npm i
+      - name: install pw   
+        run: npx playwright --with-deps
+      - name: test  
+        run: npm run test
