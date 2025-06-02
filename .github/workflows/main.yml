@@ -25,6 +25,6 @@ jobs:
       - name: install npm package    
         run: npm i
       - name: install pw   
-        run: npx playwright --with-deps
+        run: npx playwright install --with-deps
       - name: test  
         run: npm run test
