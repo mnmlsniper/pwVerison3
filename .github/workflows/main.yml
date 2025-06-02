@@ -28,3 +28,17 @@ jobs:
         run: npx playwright install --with-deps
       - name: test  
         run: npm run test
+      - name: Upload a Build Artifact
+      # сохраняем pw/allure отчет
+      - uses: actions/upload-artifact@v4
+        if: always()
+        continue-on-error: true
+        with:
+          #или test-result
+          name: allure-results #test-result
+          #или test-result
+          path: allure-results
+          retention-days: 3
+
+
+
