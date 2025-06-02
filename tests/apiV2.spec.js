@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import { Api } from '../src/services/api.service';
 
 let token;
-test.describe.only('Это тесты api', () => {
+test.describe('Это тесты api', () => {
 	test.beforeAll(async ({ request }) => {
 		const api = new Api(request);
 		const response = await api.challenger.post();
