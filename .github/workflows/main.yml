@@ -1,0 +1,44 @@
+# Название workflow
+name: e2e playwright
+
+# Триггер, когда запускать
+on:
+  push:
+    branches : [main, master]
+  pull_request:
+    branches : [main, master]
+  workflow_dispatch:
+
+
+# Сами джобы
+jobs:
+    #название джобы
+  e2e:
+    timeout-minutes: 30
+    runs-on: ubuntu-latest
+    steps:
+      #делаем чекаут кода
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+      - name: install npm package    
+        run: npm i
+      - name: install pw   
+        run: npx playwright install --with-deps
+      - name: test  
+        run: npm run test
+      - name: Upload a Build Artifact
+      # сохраняем pw/allure отчет
+      - uses: actions/upload-artifact@v4
+        if: always()
+        continue-on-error: true
+        with:
+          #или test-result
+          name: allure-results #test-result
+          #или test-result
+          path: allure-results
+          retention-days: 3
+
+
+
