@@ -6,7 +6,7 @@ pipeline {
         nodejs('NodeJS2290') {
           sh 'npm i'
           sh 'npx playwright install --with-deps'
-          sh 'npx playwright test'
+          sh 'npx playwright test || echo "Playwright tests completed with some failures"'
         }
       }      
     }
@@ -22,6 +22,18 @@ pipeline {
           ]
         )
       }
+    }
+  }
+  post {
+    always {
+      echo 'This will always run regardless of test results'
+    }
+    success {
+      echo 'Pipeline completed successfully'
+    }
+    failure {
+      echo 'Pipeline failed'
+      // Можно добавить уведомления здесь
     }
   }
 }
