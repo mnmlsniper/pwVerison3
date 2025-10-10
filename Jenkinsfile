@@ -1,11 +1,29 @@
 pipeline {
-   agent { any { image 'mcr.microsoft.com/playwright:v1.56.0-noble' } }
-   stages {
-      stage('e2e-tests') {
-         steps {
-            sh 'npm ci'
-            sh 'npx playwright test'
-         }
+  agent any
+  tools {
+      // Указываем, какую версию Node.js использовать (имя должно совпадать с настройками в Jenkins)
+      nodejs 'NodeJS2290'
+  }
+  stages {
+    stage('Build') {
+      steps {
+        sh 'npm i'
+        sh 'npx playwright install --with-deps'
+        sh 'npx playwright test'
       }
-   }
+    }
+    stage('Allure') {
+      steps {
+        allure(
+          [
+            includeProperties: false,
+            jdk: '',
+            properties: [],
+            reportBuildPolicy: 'ALWAYS',
+            results: [[path: 'allure-report']]
+          ]
+        )
+      }
+    }
+  }
 }
