@@ -3,15 +3,10 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        script {
-          // Используем Docker только как среду выполнения, но NodeJS из плагина
-          docker.image('mcr.microsoft.com/playwright:v1.56.0-noble').inside {
-            nodejs('NodeJS2290') {
-              sh 'npm i'
-              sh 'npx playwright install --with-deps'
-              sh 'npx playwright test'
-            }
-          }
+        nodejs('NodeJS2290') {
+          sh 'npm i'
+          sh 'npx playwright install --with-deps'
+          sh 'npx playwright test'
         }
       }      
     }
