@@ -1,16 +1,19 @@
 pipeline {
   agent any
-  tools {
-      // Указываем, какую версию Node.js использовать (имя должно совпадать с настройками в Jenkins)
-      nodejs 'NodeJS2290'
-  }
   stages {
     stage('Build') {
       steps {
-        sh 'npm i'
-        sh 'npx playwright install --with-deps'
-        sh 'npx playwright test'
-      }
+        script {
+          // Используем Docker только как среду выполнения, но NodeJS из плагина
+          docker.image('mcr.microsoft.com/playwright:v1.56.0-noble').inside {
+            nodejs('NodeJS2290') {
+              sh 'npm i'
+              sh 'npx playwright install --with-deps'
+              sh 'npx playwright test'
+            }
+          }
+        }
+      }      
     }
     stage('Allure') {
       steps {
