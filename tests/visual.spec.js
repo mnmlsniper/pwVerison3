@@ -38,7 +38,7 @@ test('Визуальная регрессия c моками', async ({ page }) 
 	await expect(page.locator('.navbar-brand')).toBeVisible();
 	await expect(page).toHaveScreenshot();
 });
-test.only('Визуальная регрессия c модификацией запроса', async ({ page }) => {
+test('Визуальная регрессия c модификацией запроса', async ({ page }) => {
 	await page.route('**/tags', async (route) => {
 		const response = await route.fetch();
 		const json = await response.json();
